@@ -1,0 +1,34 @@
+# ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bank-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /login(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: login-service
+            port:
+              number: 80
+      - path: /register(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: register-service
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: login-service
+            port:
+              number: 80
