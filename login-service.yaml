@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: login-service
-        image: login-service:latest
+        image: manojsavukar/login-service:latest
         ports:
         - containerPort: 8081
         env:
